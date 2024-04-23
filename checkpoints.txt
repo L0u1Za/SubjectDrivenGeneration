@@ -1,0 +1,18 @@
+dog
+    dreambooth: 1250 ??
+    lora: 1000
+    textual_inversion: 5000 ??
+    svdiff: 1400
+    custom_diffusion: 800
+backpack
+    dreambooth: 1000
+    lora: 800
+    textual_inversion: 5000
+    svdiff: 1400
+    custom_diffusion: 1200
+cat
+    dreambooth: 1000
+    lora: 600
+    textual_inversion: 500
+    svdiff: 1000
+    custom_diffusion: 200 ??

@@ -1,0 +1,6 @@
+diffusers:
+    dreambooth: cuda
+    lora: cuda
+    custom_diffusion: cuda
+    textual_inversion: cuda
+svdiff-pytorch: svdiff

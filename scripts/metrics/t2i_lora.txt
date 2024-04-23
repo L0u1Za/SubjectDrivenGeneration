@@ -1,0 +1,1 @@
+python text-image-similarity-score.py -p ../inference/generated_images/dog/t2i/lora

@@ -1,0 +1,1 @@
+python3 inference_lora.py -m ~/diffusers/examples/dreambooth/trained_lora_new/checkpoint-1000

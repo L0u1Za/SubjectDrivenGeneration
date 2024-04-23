@@ -1,0 +1,1 @@
+python3 inference.py -m ~/diffusers/examples/textual_inversion/textual_inversion_dog/

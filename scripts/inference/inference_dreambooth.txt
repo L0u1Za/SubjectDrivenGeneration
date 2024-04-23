@@ -1,0 +1,1 @@
+python3 inference_dreambooth.py -m ~/diffusers/examples/dreambooth/output_dreambooth_backpack/checkpoint-800/unet

@@ -1,0 +1,1 @@
+python3 inference.py -m ~/diffusers/examples/custom_diffusion/output_dog/checkpoint-1000

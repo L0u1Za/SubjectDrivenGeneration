@@ -1,0 +1,1 @@
+python image-image-similarity-score.py -g ../inference/generated_images/dog/i2i/lora -r ../inference/generated_images/dog/source
