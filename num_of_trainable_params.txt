@@ -1,0 +1,10 @@
+dreambooth: 865910724
+lora rank 4: 829952
+lora rank 8: 1659904 (x2 for rank increase)
+textual_inversion: 50594816
+custom_diffusion: 76153856
+svdiff, train text encoder: 368181
+svdiff: 225768
+svdiff only attn, train text encoder: 190976
+svidiff only attn: 96768
+qkv: 75120640

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+conda activate cuda
+
+cd ~/diffusers/examples/textual_inversion
+
+accelerate launch textual_inversion.py --pretrained_model_name_or_path="/home/ldnigogosova/stable-diffusion-2-base" --train_data_dir="/home/ldnigogosova/datasets/dreambooth/dataset/dog6" --learnable_property="subject" --placeholder_token="sks" --initializer_token="dog" --resolution=512 --train_batch_size=4 --gradient_accumulation_steps=1 --max_train_steps=10000 --learning_rate=5.0e-04 --lr_scheduler="constant" --lr_warmup_steps=0 --output_dir="textual_inversion_dog" --checkpointing_steps=500 --validation_prompt="a sks dog in the jungle[EOS]a sks dog on the beach[EOS]a sks dog on top of a wooden floor[EOS]a sks dog wearing a rainbow scarf[EOS]a purple sks dog" --validation_steps=500 --seed="0" --report_to="wandb"
+accelerate launch textual_inversion.py --pretrained_model_name_or_path="/home/ldnigogosova/stable-diffusion-2-base" --train_data_dir="/home/ldnigogosova/datasets/dreambooth/dataset/backpack" --learnable_property="object" --placeholder_token="sks" --initializer_token="backpack" --resolution=512 --train_batch_size=4 --gradient_accumulation_steps=1 --max_train_steps=10000 --learning_rate=5.0e-04 --lr_scheduler="constant" --lr_warmup_steps=0 --output_dir="textual_inversion_backpack" --checkpointing_steps=500 --validation_prompt="a sks backpack in the jungle[EOS]a sks backpack on the beach[EOS]a sks backpack on top of a wooden floor[EOS]a wet sks backpack[EOS]a purple sks backpack" --validation_steps=500 --seed="0" --report_to="wandb"
+accelerate launch textual_inversion.py --pretrained_model_name_or_path="/home/ldnigogosova/stable-diffusion-2-base" --train_data_dir="/home/ldnigogosova/datasets/dreambooth/dataset/cat" --learnable_property="subject" --placeholder_token="sks" --initializer_token="cat" --resolution=512 --train_batch_size=4 --gradient_accumulation_steps=1 --max_train_steps=10000 --learning_rate=5.0e-04 --lr_scheduler="constant" --lr_warmup_steps=0 --output_dir="textual_inversion_cat" --checkpointing_steps=500 --validation_prompt="a sks cat in the jungle[EOS]a sks cat on the beach[EOS]a sks cat on top of a wooden floor[EOS]a sks cat wearing a rainbow scarf[EOS]a purple sks cat" --validation_steps=500 --seed="0" --report_to="wandb"
+
+

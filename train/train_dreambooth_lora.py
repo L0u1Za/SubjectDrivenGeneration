@@ -970,6 +970,7 @@ def main(args):
 
     # Optimizer creation
     params_to_optimize = list(filter(lambda p: p.requires_grad, unet.parameters()))
+    print(f"Number of trainable parameters: {sum(p.numel() for p in params_to_optimize)}")
     if args.train_text_encoder:
         params_to_optimize = params_to_optimize + list(filter(lambda p: p.requires_grad, text_encoder.parameters()))
 

@@ -1,5 +1,5 @@
 
-from diffusers import DiffusionPipeline
+from diffusers import StableDiffusionPipeline, DDIMScheduler
 import torch
 import argparse
 
@@ -19,7 +19,9 @@ if __name__ == "__main__":
 	num_images_per_prompt = int(args.num_images_per_prompt)
 
 
-	pipe = DiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", torch_dtype=torch.float16, safety_checker = None).to("cuda")
+	pipe = StableDiffusionPipeline.from_pretrained("/home/ldnigogosova/stable-diffusion-2-base", torch_dtype=torch.float16, safety_checker = None)
+	pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
+	pipe.to("cuda")
 	pipe.load_textual_inversion(model_id, weight_name="sks.bin")
 	pipe.unet.load_attn_procs(model_id, weight_name="pytorch_custom_diffusion_weights.bin")
 

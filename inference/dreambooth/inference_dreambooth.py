@@ -1,5 +1,5 @@
 from accelerate import Accelerator
-from diffusers import DiffusionPipeline, UNet2DConditionModel
+from diffusers import StableDiffusionPipeline, UNet2DConditionModel, DDIMScheduler
 import torch
 
 
@@ -24,11 +24,13 @@ if __name__ == "__main__":
 	unet = UNet2DConditionModel.from_pretrained(model_id).to("cuda")
 
 	# Rebuild the pipeline with the unwrapped models (assignment to .unet and .text_encoder should work too)
-	pipe = DiffusionPipeline.from_pretrained(
-		"CompVis/stable-diffusion-v1-4",
+	pipe = StableDiffusionPipeline.from_pretrained(
+		"/home/ldnigogosova/stable-diffusion-2-base",
 		unet=unet,
 		safety_checker = None
-	).to("cuda")
+	)
+	pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
+	pipe.to("cuda")
 
 	for prompt in prompts:
 		for i in range(num_images_per_prompt):

@@ -63,7 +63,7 @@ if is_wandb_available():
     import wandb
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
-check_min_version("0.27.0.dev0")
+
 
 logger = get_logger(__name__)
 
@@ -1053,6 +1053,7 @@ def main(args):
     params_to_optimize = (
         itertools.chain(unet.parameters(), text_encoder.parameters()) if args.train_text_encoder else unet.parameters()
     )
+    print(f"Number of trainable parameters: {sum(p.numel() for p in params_to_optimize)}")
     optimizer = optimizer_class(
         params_to_optimize,
         lr=args.learning_rate,

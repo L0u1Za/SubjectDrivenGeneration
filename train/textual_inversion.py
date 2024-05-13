@@ -79,7 +79,6 @@ else:
 
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
-check_min_version("0.27.0.dev0")
 
 logger = get_logger(__name__)
 
@@ -738,9 +737,11 @@ def main():
             args.learning_rate * args.gradient_accumulation_steps * args.train_batch_size * accelerator.num_processes
         )
 
+    parameters_to_optimize = text_encoder.get_input_embeddings().parameters()
+    print(f"Number of trainable parameters: {sum(p.numel() for p in parameters_to_optimize)}")
     # Initialize the optimizer
     optimizer = torch.optim.AdamW(
-        text_encoder.get_input_embeddings().parameters(),  # only optimize the embeddings
+        parameters_to_optimize,  # only optimize the embeddings
         lr=args.learning_rate,
         betas=(args.adam_beta1, args.adam_beta2),
         weight_decay=args.adam_weight_decay,

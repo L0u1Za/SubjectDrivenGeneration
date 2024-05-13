@@ -1,0 +1,13 @@
+#!/bin/bash
+
+conda activate cuda
+
+cd ~/diffusers/examples/custom_diffusion
+
+
+
+accelerate launch train_custom_diffusion.py --pretrained_model_name_or_path="/home/ldnigogosova/stable-diffusion-2-base" --instance_data_dir="/home/ldnigogosova/datasets/dreambooth/dataset/dog6" --output_dir="output_dog" --with_prior_preservation --prior_loss_weight=1.0 --class_prompt="a dog" --class_data_dir=./prior_images_dog --instance_prompt="a sks dog" --resolution=512 --train_batch_size=4 --learning_rate=1e-5 --lr_warmup_steps=0 --lr_scheduler="constant" --max_train_steps=2000 --modifier_token "sks" --validation_prompt="a sks dog in the jungle[EOS]a sks dog on the beach[EOS]a sks dog on top of a wooden floor[EOS]a wet sks dog[EOS]a purple sks dog" --validation_steps=200 --checkpointing_steps=200 --report_to="wandb" --no_safe_serialization --num_class_images=1000 --sample_batch_size=10 --gradient_accumulation_steps=1
+accelerate launch train_custom_diffusion.py --pretrained_model_name_or_path="/home/ldnigogosova/stable-diffusion-2-base" --instance_data_dir="/home/ldnigogosova/datasets/dreambooth/dataset/backpack" --output_dir="output_backpack" --with_prior_preservation --prior_loss_weight=1.0 --class_prompt="a backpack" --class_data_dir=./prior_images_backpack --instance_prompt="a sks backpack" --resolution=512 --train_batch_size=4 --learning_rate=1e-5 --lr_warmup_steps=0 --lr_scheduler="constant" --max_train_steps=2000 --modifier_token "sks" --validation_prompt="a sks backpack in the jungle[EOS]a sks backpack on the beach[EOS]a sks backpack on top of a wooden floor[EOS]a wet sks backpack[EOS]a purple sks backpack" --validation_steps=200 --checkpointing_steps=200 --report_to="wandb" --no_safe_serialization --num_class_images=1000 --sample_batch_size=10 --gradient_accumulation_steps=1
+accelerate launch train_custom_diffusion.py --pretrained_model_name_or_path="/home/ldnigogosova/stable-diffusion-2-base" --instance_data_dir="/home/ldnigogosova/datasets/dreambooth/dataset/cat" --output_dir="output_cat" --with_prior_preservation --prior_loss_weight=1.0 --class_prompt="a cat" --class_data_dir=./prior_images_cat --instance_prompt="a sks cat" --resolution=512 --train_batch_size=4 --learning_rate=1e-5 --lr_warmup_steps=0 --lr_scheduler="constant" --max_train_steps=2000 --modifier_token "sks" --validation_prompt="a sks cat in the jungle[EOS]a sks cat on the beach[EOS]a sks cat on top of a wooden floor[EOS]a sks cat wearing a rainbow scarf[EOS]a purple sks cat" --validation_steps=200 --checkpointing_steps=200 --report_to="wandb" --no_safe_serialization --num_class_images=1000 --sample_batch_size=10 --gradient_accumulation_steps=1
+
+

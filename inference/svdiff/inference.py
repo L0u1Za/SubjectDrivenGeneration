@@ -1,4 +1,4 @@
-from diffusers import DiffusionPipeline, DPMSolverMultistepScheduler
+from diffusers import StableDiffusionPipeline, DDIMScheduler
 import torch
 
 from svdiff_pytorch import load_unet_for_svdiff, load_text_encoder_for_svdiff
@@ -20,17 +20,17 @@ if __name__ == "__main__":
         prompts = f.read().split('\n')
     num_images_per_prompt = int(args.num_images_per_prompt)
 
-    text_encoder = load_text_encoder_for_svdiff("runwayml/stable-diffusion-v1-5", spectral_shifts_ckpt=model_id, subfolder="text_encoder")
-    unet = load_unet_for_svdiff("runwayml/stable-diffusion-v1-5", spectral_shifts_ckpt=model_id, subfolder="unet")
+    text_encoder = load_text_encoder_for_svdiff("/home/ldnigogosova/stable-diffusion-2-base", spectral_shifts_ckpt=model_id, subfolder="text_encoder")
+    unet = load_unet_for_svdiff("/home/ldnigogosova/stable-diffusion-2-base", spectral_shifts_ckpt=model_id, subfolder="unet")
 
     # load pipe
-    pipe = DiffusionPipeline.from_pretrained(
-        "runwayml/stable-diffusion-v1-5",
+    pipe = StableDiffusionPipeline.from_pretrained(
+        "/home/ldnigogosova/stable-diffusion-2-base",
         unet=unet,
         text_encoder=text_encoder,
         safety_checker = None
     )
-    pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+    pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
     pipe.to("cuda")
 
     for prompt in prompts:

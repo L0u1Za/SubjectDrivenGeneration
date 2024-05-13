@@ -991,11 +991,13 @@ def main(args):
     else:
         optimizer_class = torch.optim.AdamW
 
+    parameters_to_optimize = itertools.chain(text_encoder.get_input_embeddings().parameters(), custom_diffusion_layers.parameters()) \
+        if args.modifier_token is not None \
+        else custom_diffusion_layers.parameters()
+    print(f"Number of trainable parameters: {sum(p.numel() for p in parameters_to_optimize)}")
     # Optimizer creation
     optimizer = optimizer_class(
-        itertools.chain(text_encoder.get_input_embeddings().parameters(), custom_diffusion_layers.parameters())
-        if args.modifier_token is not None
-        else custom_diffusion_layers.parameters(),
+        parameters_to_optimize,
         lr=args.learning_rate,
         betas=(args.adam_beta1, args.adam_beta2),
         weight_decay=args.adam_weight_decay,

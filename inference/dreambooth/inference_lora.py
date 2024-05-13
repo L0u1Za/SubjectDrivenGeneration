@@ -1,5 +1,5 @@
 
-from diffusers import DiffusionPipeline, DPMSolverMultistepScheduler
+from diffusers import StableDiffusionPipeline, DDIMScheduler
 import torch
 
 import argparse
@@ -19,8 +19,8 @@ if __name__ == "__main__":
 		prompts = f.read().split('\n')
 	num_images_per_prompt = int(args.num_images_per_prompt)
 
-	pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float32, safety_checker = None)
-	pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+	pipe = StableDiffusionPipeline.from_pretrained("/home/ldnigogosova/stable-diffusion-2-base", torch_dtype=torch.float32, safety_checker = None)
+	pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
 	pipe.to("cuda")
 
 	pipe.load_lora_weights(model_id)

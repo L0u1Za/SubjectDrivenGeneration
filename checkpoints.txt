@@ -1,18 +1,21 @@
 dog
-    dreambooth: 1250 ??
+    dreambooth: 600
     lora: 1000
-    textual_inversion: 5000 ??
-    svdiff: 1400
-    custom_diffusion: 800
+    textual_inversion: 4000
+    svdiff: 1200
+    custom_diffusion: 600
+    qkv: 1500
 backpack
-    dreambooth: 1000
-    lora: 800
-    textual_inversion: 5000
+    dreambooth: 600
+    lora: 1000
+    textual_inversion: 3500
     svdiff: 1400
     custom_diffusion: 1200
+    qkv:
 cat
-    dreambooth: 1000
-    lora: 600
-    textual_inversion: 500
-    svdiff: 1000
-    custom_diffusion: 200 ??
+    dreambooth: 600
+    lora: 700
+    textual_inversion: 2500
+    svdiff: 1200
+    custom_diffusion: 1400
+    qkv: 1500

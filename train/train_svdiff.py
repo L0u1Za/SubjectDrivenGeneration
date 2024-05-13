@@ -738,7 +738,7 @@ def main(args):
                     optim_params.append(p)
         
     total_params = sum(p.numel() for p in optim_params)
-    print(f"Number of Trainable Parameters: {total_params * 1.e-6:.2f} M")
+    print(f"Number of Trainable Parameters: {total_params}")
 
     if args.enable_xformers_memory_efficient_attention:
         if is_xformers_available():
