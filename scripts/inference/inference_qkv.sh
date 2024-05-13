@@ -1,12 +1,21 @@
 #!/bin/bash
-cd ~/inference/dreambooth
+cd /home/ldnigogosova/inference/dreambooth
 
-python3 inference_dreambooth.py -m ~/diffusers/examples/dreambooth/trained_dreambooth_dog/checkpoint-600 -p ../dog_t2i_prompt.txt -s ../generated_images/dog/t2i/dreambooth
-python3 inference_dreambooth.py -m ~/diffusers/examples/dreambooth/trained_dreambooth_dog/checkpoint-600 -p ../dog_i2i_prompt.txt -s ../generated_images/dog/i2i/dreambooth -n 40
+for i in {2..8}
+do
+    j=$((2**$i))
+    mkdir ../generated_images/dog/t2i/qkv_rank_$j
+    mkdir ../generated_images/dog/i2i/qkv_rank_$j
+    python3 inference_qkv.py -m /home/ldnigogosova/train/trained_dreambooth_qkv_dog/checkpoint-1500 -p ../dog_t2i_prompt.txt -s ../generated_images/dog/t2i/qkv_rank_$j -r $j
+    python3 inference_qkv.py -m /home/ldnigogosova/train/trained_dreambooth_qkv_dog/checkpoint-1500 -p ../dog_i2i_prompt.txt -s ../generated_images/dog/i2i/qkv_rank_$j -n 40 -r $j
 
+    mkdir ../generated_images/backpack/t2i/qkv_rank_$j
+    mkdir ../generated_images/backpack/i2i/qkv_rank_$j
+    python3 inference_qkv.py -m /home/ldnigogosova/train/trained_dreambooth_qkv_backpack/checkpoint-1400 -p ../backpack_t2i_prompt.txt -s ../generated_images/backpack/t2i/qkv_rank_$j -r $j
+    python3 inference_qkv.py -m /home/ldnigogosova/train/trained_dreambooth_qkv_backpack/checkpoint-1400 -p ../backpack_i2i_prompt.txt -s ../generated_images/backpack/i2i/qkv_rank_$j -n 40 -r $j
 
-python3 inference_dreambooth.py -m ~/diffusers/examples/dreambooth/trained_dreambooth_backpack/checkpoint-600 -p ../backpack_t2i_prompt.txt -s ../generated_images/backpack/t2i/dreambooth
-python3 inference_dreambooth.py -m ~/diffusers/examples/dreambooth/trained_dreambooth_backpack/checkpoint-600 -p ../backpack_i2i_prompt.txt -s ../generated_images/backpack/i2i/dreambooth -n 40
-
-python3 inference_dreambooth.py -m ~/diffusers/examples/dreambooth/trained_dreambooth_cat/checkpoint-600 -p ../cat_t2i_prompt.txt -s ../generated_images/cat/t2i/dreambooth
-python3 inference_dreambooth.py -m ~/diffusers/examples/dreambooth/trained_dreambooth_cat/checkpoint-600 -p ../cat_i2i_prompt.txt -s ../generated_images/cat/i2i/dreambooth -n 40
+    mkdir ../generated_images/cat/t2i/qkv_rank_$j
+    mkdir ../generated_images/cat/i2i/qkv_rank_$j
+    python3 inference_qkv.py -m /home/ldnigogosova/train/trained_dreambooth_qkv_cat/checkpoint-1500 -p ../cat_t2i_prompt.txt -s ../generated_images/cat/t2i/qkv_rank_$j -r $j
+    python3 inference_qkv.py -m /home/ldnigogosova/train/trained_dreambooth_qkv_cat/checkpoint-1500 -p ../cat_i2i_prompt.txt -s ../generated_images/cat/i2i/qkv_rank_$j -n 40 -r $j
+done
