@@ -8,3 +8,9 @@ svdiff: 225768
 svdiff only attn, train text encoder: 190976
 svidiff only attn: 96768
 qkv: 75120640
+
+frozen params unet:
+*: 865910724
+qkv rank 4: 866740676
+qkv rank 8: 
+qkv rank 16: 

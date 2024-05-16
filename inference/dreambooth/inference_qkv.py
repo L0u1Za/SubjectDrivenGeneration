@@ -11,6 +11,7 @@ import os
 
 def apply_svd_lora(model_id, args):
 	unet = UNet2DConditionModel.from_pretrained("/home/ldnigogosova/stable-diffusion-2-base", subfolder="unet").to("cuda")
+	print("Unet params before SVD", unet.num_parameters())
 	original_weights = {}
 	for (name, param) in unet.named_parameters():
 		if 'to_q' in name or 'to_k' in name or 'to_v' in name:
@@ -76,6 +77,13 @@ def apply_svd_lora(model_id, args):
 				lora_attn_procs[name].to_v_lora.down.weight = nn.Parameter(dw.clone().to(dtype=torch.float32))
 				lora_attn_procs[name].to_v_lora.up.weight = nn.Parameter(uw.clone().to(dtype=torch.float32))
 	unet.set_attn_processor(lora_attn_procs)
+
+	params = []
+	for n, p in unet.named_parameters():
+		if p.requires_grad == True:
+			params.append(p)
+	total_params = sum(p.numel() for p in params)
+	print("Unet params after SVD", total_params)
 	return unet
 
 if __name__ == "__main__":
